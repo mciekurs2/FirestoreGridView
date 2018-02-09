@@ -1,19 +1,19 @@
 package com.example.mrticiekurs.firestoregridview;
 
 public class Images {
-    private String images;
+    private String url;
 
     public Images(){} //needed for Firebasse
 
-    public Images(String images) {
-        this.images = images;
+    public Images(String url) {
+        this.url = url;
     }
 
-    public String getImages() {
-        return images;
+    public String getUrl() {
+        return url;
     }
 
-    public void setImages(String images) {
-        this.images = images;
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

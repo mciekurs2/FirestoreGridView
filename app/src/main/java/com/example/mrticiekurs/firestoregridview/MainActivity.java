@@ -9,8 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -36,10 +38,8 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
 
-        gridLayoutManager = new GridLayoutManager(this, 3);
+        gridLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(gridLayoutManager);
-
-
 
     }
 
@@ -50,8 +50,17 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new FirestoreRecyclerAdapter<Images, ImageHolder>(response) {
             @Override
-            protected void onBindViewHolder(@NonNull ImageHolder holder, int position, @NonNull Images model) {
-                Glide.with(getApplicationContext()).load(model.getUrl()).into(holder.imageView);
+            protected void onBindViewHolder(@NonNull ImageHolder holder, int position, @NonNull final Images model) {
+                Glide.with(getApplicationContext()).load(model.getUrl()).apply(RequestOptions.centerCropTransform()).into(holder.imageView);
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getApplicationContext(), model.getUrl().toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
             }
 
             @Override
@@ -60,8 +69,6 @@ public class MainActivity extends AppCompatActivity {
                 return new ImageHolder(view);
             }
         };
-
-
 
     }
 

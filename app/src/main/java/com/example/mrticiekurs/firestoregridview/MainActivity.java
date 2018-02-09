@@ -3,6 +3,7 @@ package com.example.mrticiekurs.firestoregridview;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,15 +23,21 @@ public class MainActivity extends AppCompatActivity {
 
     private FirestoreRecyclerAdapter adapter;
     private RecyclerView recyclerView;
+    private GridLayoutManager gridLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
 
+        recyclerView = findViewById(R.id.recyclerView);
 
+        getImages();
+        adapter.notifyDataSetChanged();
+        recyclerView.setAdapter(adapter);
 
+        gridLayoutManager = new GridLayoutManager(this, 3);
+        recyclerView.setLayoutManager(gridLayoutManager);
 
 
 
@@ -67,6 +74,19 @@ public class MainActivity extends AppCompatActivity {
             ButterKnife.bind(this, itemView);
         }
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }
+
 
 
 }

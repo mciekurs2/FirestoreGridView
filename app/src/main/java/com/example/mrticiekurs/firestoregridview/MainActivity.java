@@ -1,5 +1,6 @@
 package com.example.mrticiekurs.firestoregridview;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getImages(){
-        Query query = FirebaseFirestore.getInstance().collection("images").limit(10);
+        Query query = FirebaseFirestore.getInstance().collection("images");
         FirestoreRecyclerOptions<Images> response = new FirestoreRecyclerOptions.Builder<Images>()
                 .setQuery(query, Images.class).build();
 
@@ -56,7 +57,14 @@ public class MainActivity extends AppCompatActivity {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(getApplicationContext(), model.getUrl().toString(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), model.getUrl().toString(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, FullscreenActivity.class);
+                        Bundle extras = new Bundle();
+                        extras.putString("url", model.getUrl());
+                        intent.putExtras(extras);
+                        startActivity(intent);
+
+
                     }
                 });
 

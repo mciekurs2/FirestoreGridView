@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "326708782216",
+    "firebase_url": "https://firestoregridview.firebaseio.com",
+    "project_id": "firestoregridview",
+    "storage_bucket": "firestoregridview.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:326708782216:android:127bcc39fb6056d7",
+        "android_client_info": {
+          "package_name": "com.example.mrticiekurs.firestoregridview"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "326708782216-osec2rdc212ct32uqt8rr8b8hdb4tjdf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mrticiekurs.firestoregridview",
+            "certificate_hash": "545d4a37a940bf37028cd276f78888ddbf94a6ae"
+          }
+        },
+        {
+          "client_id": "326708782216-e3s43vp0ajt03qo9v0bvkgpr9f89ooiv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdPY4_1X80dDSgQ1pXbewoIx3atyGhB6M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "326708782216-e3s43vp0ajt03qo9v0bvkgpr9f89ooiv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

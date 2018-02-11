@@ -2,6 +2,7 @@ package com.example.mrticiekurs.firestoregridview;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -22,6 +23,12 @@ public class FullscreenActivity extends AppCompatActivity {
 
         Glide.with(getApplicationContext()).load(url).apply(RequestOptions.centerCropTransform()).into(imageView);
 
-
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
 }

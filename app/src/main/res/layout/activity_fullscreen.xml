@@ -4,12 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
     tools:context="com.example.mrticiekurs.firestoregridview.FullscreenActivity">
 
     <ImageView
         android:id="@+id/fullImageView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1" />
 </LinearLayout>

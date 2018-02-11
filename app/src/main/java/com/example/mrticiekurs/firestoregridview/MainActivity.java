@@ -1,7 +1,11 @@
 package com.example.mrticiekurs.firestoregridview;
 
 import android.content.Intent;
+import android.os.Build;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -27,13 +31,13 @@ public class MainActivity extends AppCompatActivity {
     private FirestoreRecyclerAdapter adapter;
     private RecyclerView recyclerView;
     private GridLayoutManager gridLayoutManager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.recyclerView);
+
 
         getImages();
         adapter.notifyDataSetChanged();
@@ -43,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(gridLayoutManager);
 
     }
+
 
     public void getImages(){
         Query query = FirebaseFirestore.getInstance().collection("images");
@@ -55,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 Glide.with(getApplicationContext()).load(model.getUrl()).apply(RequestOptions.centerCropTransform()).into(holder.imageView);
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN) //to Allow transition animation
                     @Override
                     public void onClick(View view) {
                         //Toast.makeText(getApplicationContext(), model.getUrl().toString(), Toast.LENGTH_SHORT).show();
@@ -63,8 +69,7 @@ public class MainActivity extends AppCompatActivity {
                         extras.putString("url", model.getUrl());
                         intent.putExtras(extras);
                         startActivity(intent);
-
-
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
                 });
 
@@ -95,11 +100,11 @@ public class MainActivity extends AppCompatActivity {
         adapter.startListening();
     }
 
-    @Override
+/*    @Override
     public void onStop() {
         super.onStop();
         adapter.stopListening();
-    }
+    }*/
 
 
 

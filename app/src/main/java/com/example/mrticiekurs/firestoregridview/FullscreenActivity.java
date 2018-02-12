@@ -6,6 +6,8 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 
 public class FullscreenActivity extends AppCompatActivity {
@@ -21,7 +23,7 @@ public class FullscreenActivity extends AppCompatActivity {
         String url = extras.getString("url");
         imageView = findViewById(R.id.fullImageView);
 
-        Glide.with(getApplicationContext()).load(url).apply(RequestOptions.centerCropTransform()).into(imageView);
+        Glide.with(getApplicationContext()).load(url).transition(DrawableTransitionOptions.withCrossFade()).apply(RequestOptions.centerCropTransform().diskCacheStrategy(DiskCacheStrategy.DATA)).into(imageView);
 
     }
 

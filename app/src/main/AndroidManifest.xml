@@ -23,8 +23,13 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".RegisterActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".FullscreenActivity"></activity>
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".FullscreenActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>

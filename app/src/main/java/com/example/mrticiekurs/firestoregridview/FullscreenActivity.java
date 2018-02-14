@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -23,7 +26,9 @@ public class FullscreenActivity extends AppCompatActivity {
 
     private ImageView imageView;
     private ProgressBar progressBar;
-    private Toolbar toolbar;
+    private ScrollView scrollView;
+    private FrameLayout frameLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +39,12 @@ public class FullscreenActivity extends AppCompatActivity {
         String url = extras.getString("url");
         imageView = findViewById(R.id.fullImageView);
         progressBar = findViewById(R.id.progFull);
-        toolbar = findViewById(R.id.toolbarTrans);
-        setSupportActionBar(toolbar);
+        scrollView = (ScrollView) findViewById(R.id.scrollViewMain);
+        frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
+
+        scrollView.getViewTreeObserver().addOnScrollChangedListener(new ScrollPositionObserver());
+
+
 
         Glide.with(getApplicationContext()).load(url).
                 transition(DrawableTransitionOptions.withCrossFade()).
@@ -61,5 +70,25 @@ public class FullscreenActivity extends AppCompatActivity {
         super.finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
+
+
+    private class ScrollPositionObserver implements ViewTreeObserver.OnScrollChangedListener{
+
+        private int imageViewHeight;
+
+        public ScrollPositionObserver(){
+            imageViewHeight = getResources().getDimensionPixelSize(R.dimen.layout_dim);
+        }
+
+        @Override
+        public void onScrollChanged() {
+            int scrollY = Math.min(Math.max(scrollView.getScrollY(), 0), imageViewHeight);
+            imageView.setTranslationY(scrollY / 2);
+            float alpha = scrollY / (float) imageViewHeight;
+
+        }
+    }
+
+
 
 }
